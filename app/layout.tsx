@@ -219,6 +219,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="NaverBot" content="all" />
         <meta name="Yeti" content="all" />
+        <meta name="naver-site-verification" content="36e9a3d7ff5db494eb24f2315d9e89c8cdd6f12e" />
 
         {/* 언어 / 지역 — 네이버·구글에 한국 사이트임을 명시 */}
         <meta httpEquiv="content-language" content="ko-KR" />
