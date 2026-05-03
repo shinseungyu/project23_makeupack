@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' });
 
 const SITE_NAME = '메이크업학원수강료비교';
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://makeuphakwon.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://makeupcost.com';
 const TITLE = '메이크업학원수강료 비교 | 메이크업학원비용·국비지원·가격 총정리 (2026)';
 const DESC = '메이크업학원수강료 비교 사이트. 메이크업학원비용·메이크업학원가격·국비지원 메이크업학원 정보를 2026년 최신 기준으로 총정리했습니다. 강남메이크업학원 수강료, 내일배움카드 지원율, 자격증 취득 비용까지 한눈에 비교하고 무료 상담으로 확인하세요.';
 const OG_IMAGE = `${SITE_URL}/thumb.webp`;
@@ -97,7 +97,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://makeuphakwon.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://makeupcost.com';
 
   const jsonLd = {
     '@context': 'https://schema.org',

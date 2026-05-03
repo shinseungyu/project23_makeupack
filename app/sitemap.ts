@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import postsData from '@/data/posts.json';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://makeuphakwon.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://makeupcost.com';
 
   const postUrls = postsData.map(post => ({
     url: `${baseUrl}/board?id=${post.id}`,
