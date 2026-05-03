@@ -3,8 +3,9 @@ import Link from 'next/link';
 import postsData from '@/data/posts.json';
 import { ChevronLeft } from 'lucide-react';
 
-export async function generateMetadata({ searchParams }: { searchParams: { id?: string } }): Promise<Metadata> {
-  const postId = searchParams.id ? parseInt(searchParams.id) : null;
+export async function generateMetadata({ searchParams }: { searchParams: Promise<{ id?: string }> }): Promise<Metadata> {
+  const { id } = await searchParams;
+  const postId = id ? parseInt(id) : null;
   const post = postId ? postsData.find(p => p.id === postId) : null;
 
   if (post) {
@@ -22,8 +23,9 @@ export async function generateMetadata({ searchParams }: { searchParams: { id?: 
   };
 }
 
-export default function BoardPage({ searchParams }: { searchParams: { id?: string } }) {
-  const postId = searchParams.id ? parseInt(searchParams.id) : null;
+export default async function BoardPage({ searchParams }: { searchParams: Promise<{ id?: string }> }) {
+  const { id } = await searchParams;
+  const postId = id ? parseInt(id) : null;
   const post = postId ? postsData.find(p => p.id === postId) : null;
 
   if (post) {
