@@ -3,6 +3,7 @@ import Script from 'next/script';
 import { Geist } from 'next/font/google';
 import './globals.css';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' });
 
@@ -258,42 +259,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={geist.variable}>
-        <nav style={{
-          background: 'var(--glass)',
-          backdropFilter: 'var(--glass-blur)',
-          WebkitBackdropFilter: 'var(--glass-blur)',
-          borderBottom: '1px solid rgba(229,225,216,0.5)',
-          position: 'sticky',
-          top: 0,
-          zIndex: 50,
-          padding: '0 1.5rem',
-        }}>
-          <div style={{
-            maxWidth: 1100,
-            margin: '0 auto',
-            display: 'flex',
-            height: '4rem',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}>
-            <a href="/" style={{ fontWeight: 900, fontSize: 15, color: 'var(--primary)', textDecoration: 'none', letterSpacing: '-0.02em' }}>
-              메이크업학원 <span style={{ color: 'var(--accent)' }}>수강료비교</span>
-            </a>
-            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-              {[
-                { href: '/', label: '홈' },
-                { href: '/funding', label: '국비지원' },
-                { href: '/employment', label: '해외취업' },
-                { href: '/qna', label: 'FAQ' },
-                { href: '/board', label: '정보게시판' },
-              ].map(({ href, label }) => (
-                <a key={href} href={href} style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-secondary)', textDecoration: 'none' }}>
-                  {label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </nav>
+        <Header />
         {children}
         <Footer />
       </body>
