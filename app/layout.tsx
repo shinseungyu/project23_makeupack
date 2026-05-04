@@ -151,52 +151,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           { '@type': 'ListItem', position: 4, name: 'FAQ', item: `${siteUrl}/qna` },
         ],
       },
-      {
-        '@type': 'FAQPage',
-        '@id': `${siteUrl}/#faq`,
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: '메이크업아티스트 자격증 취득까지 기간이 얼마나 걸리나요?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: '미용사(메이크업) 국가자격증은 보통 주 3회 수업 기준 3~4개월 정도 소요됩니다. 학원마다 커리큘럼이 다르므로 소수정예 여부, 실기 보강 여부를 꼭 확인하세요.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '메이크업학원 수강료가 얼마나 드나요?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: '국가자격증 과정 기준 100만~200만원 선이 일반적입니다. 국비지원(내일배움카드)을 활용하면 수강료의 45~100%를 지원받을 수 있어 실부담이 크게 줄어듭니다.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '내일배움카드로 메이크업학원 등록이 가능한가요?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: '네, 가능합니다. 고용노동부 HRD-Net에서 "메이크업" 또는 "미용" 훈련과정을 검색하면 내일배움카드 적용 학원을 확인할 수 있습니다. 자비 부담 없이 수강 가능한 과정도 있습니다.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '메이크업 자격증 없이도 취업이 가능한가요?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: '웨딩·방송·무대 메이크업 분야는 포트폴리오와 실기 실력을 중시하므로, 자격증 없이도 취업이 가능합니다. 다만 국가자격증(미용사 메이크업)이 있으면 채용 시 우대받을 수 있습니다.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '강남 메이크업학원이 지방보다 수강료가 비싼가요?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: '강남권 학원은 같은 과정 대비 지방보다 20~40% 높은 편입니다. 다만 유명 강사진과 취업 네트워크 측면에서 강점이 있어, 취업을 목표로 한다면 충분히 고려할 만합니다.',
-            },
-          },
-        ],
-      },
     ],
   };
 
