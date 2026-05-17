@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import postsData from '@/data/posts.json';
 import { ChevronLeft } from 'lucide-react';
+import FormSection from '@/components/FormSection';
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ id?: string }> }): Promise<Metadata> {
   const { id } = await searchParams;
@@ -48,6 +49,12 @@ export default async function BoardPage({ searchParams }: { searchParams: Promis
             <span key={tag} style={{ background: 'var(--primary-light)', color: 'var(--primary-dark)', fontSize: 12, fontWeight: 700, padding: '6px 16px', borderRadius: 50 }}>#{tag}</span>
           ))}
         </div>
+
+        <section style={{ marginTop: 80 }}>
+          <p style={{ fontSize: 13, fontWeight: 900, color: 'var(--primary)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 16 }}>무료 상담 신청</p>
+          <h2 style={{ fontSize: 22, fontWeight: 900, marginBottom: 24 }}>메이크업학원 맞춤 상담받기</h2>
+          <FormSection />
+        </section>
 
         <section style={{ marginTop: 80 }}>
           <h2 style={{ fontSize: 22, fontWeight: 900, marginBottom: 24 }}>관련 글 더 보기</h2>
