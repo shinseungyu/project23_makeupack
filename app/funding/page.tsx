@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
+import FormSection from '@/components/FormSection';
 
 export const metadata: Metadata = {
   title: '메이크업학원 국비지원 완벽 가이드 | 내일배움카드 신청방법',
@@ -33,6 +34,14 @@ export default function FundingPage() {
           </div>
         </div>
         <div style={{ position: 'absolute', right: -50, top: -50, width: 200, height: 200, background: 'var(--primary)', opacity: 0.05, borderRadius: '50%' }}></div>
+      </div>
+
+      <div style={{ marginBottom: 60 }}>
+        <h3 style={{ fontSize: 17, fontWeight: 800, marginBottom: 8, textAlign: 'center' }}>메이크업학원 수강료·국비지원 더 궁금하신가요?</h3>
+        <p style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: 20, textAlign: 'center' }}>
+          전문 상담사가 1:1로 맞춤 수강료 정보와 국비지원 혜택을 안내해 드립니다.
+        </p>
+        <FormSection />
       </div>
 
       {/* 지원 자격 */}

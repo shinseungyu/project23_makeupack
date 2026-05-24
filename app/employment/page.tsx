@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
+import FormSection from '@/components/FormSection';
 
 export const metadata: Metadata = {
   title: '메이크업아티스트 해외취업 가이드 | 일본·호주·캐나다·미국 취업',
@@ -34,6 +35,14 @@ export default function EmploymentPage() {
           </div>
         </div>
         <div style={{ position: 'absolute', right: -50, top: -50, width: 200, height: 200, background: 'var(--primary)', opacity: 0.05, borderRadius: '50%' }}></div>
+      </div>
+
+      <div style={{ marginBottom: 60 }}>
+        <h3 style={{ fontSize: 17, fontWeight: 800, marginBottom: 8, textAlign: 'center' }}>해외취업 준비, 어디서부터 시작할지 모르겠다면?</h3>
+        <p style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: 20, textAlign: 'center' }}>
+          목표 국가와 비자 조건, 추천 학원까지 1:1 무료 상담으로 맞춤 정보를 받아보세요.
+        </p>
+        <FormSection />
       </div>
 
       {/* 왜 해외취업인가 */}

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
+import FormSection from '@/components/FormSection';
 
 export default function QnaClient() {
   const [openId, setOpenId] = useState<number | null>(1);
@@ -71,7 +72,7 @@ export default function QnaClient() {
         <ChevronLeft size={16} /> 홈으로 돌아가기
       </Link>
 
-      <div style={{ textAlign: 'center', marginBottom: 40 }}>
+      <div style={{ textAlign: 'center', marginBottom: 32 }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 56, height: 56, background: 'var(--primary-light)', borderRadius: 16, marginBottom: 16 }}>
           <HelpCircle size={28} color="var(--primary)" />
         </div>
@@ -80,6 +81,14 @@ export default function QnaClient() {
           메이크업학원 수강료, 국비지원, 취업, 환불 등 등록 전 가장 많이 묻는 질문을 정리했습니다.<br />
           과정 선택부터 강남 학원 비교, 포트폴리오까지 전문가 답변으로 확인하세요.
         </p>
+      </div>
+
+      <div style={{ marginBottom: 36 }}>
+        <h3 style={{ fontSize: 17, fontWeight: 800, marginBottom: 8, textAlign: 'center' }}>메이크업학원 수강료·국비지원 더 궁금하신가요?</h3>
+        <p style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: 20, textAlign: 'center' }}>
+          전문 상담사가 1:1로 맞춤 수강료 정보와 국비지원 혜택을 안내해 드립니다.
+        </p>
+        <FormSection />
       </div>
 
       <Link href="/guide" style={{ textDecoration: 'none', display: 'block', marginBottom: 12 }}>
@@ -151,15 +160,6 @@ export default function QnaClient() {
         </div>
       </div>
 
-      <div style={{ background: 'linear-gradient(to bottom right, #ede9fe, #fef3c7)', borderRadius: 20, padding: '32px', textAlign: 'center', marginTop: 24 }}>
-        <h3 style={{ fontSize: 17, fontWeight: 800, marginBottom: 8 }}>메이크업학원 수강료·국비지원 더 궁금하신가요?</h3>
-        <p style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: 20 }}>
-          전문 상담사가 1:1로 맞춤 수강료 정보와 국비지원 혜택을 안내해 드립니다.
-        </p>
-        <Link href="/#consulting" style={{ display: 'inline-block', background: 'var(--primary)', color: 'white', fontWeight: 700, fontSize: 14, padding: '12px 28px', borderRadius: 50, textDecoration: 'none' }}>
-          무료 상담 신청
-        </Link>
-      </div>
     </main>
   );
 }
