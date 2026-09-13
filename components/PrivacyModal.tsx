@@ -77,7 +77,7 @@ export default function PrivacyModal({ onConfirm, onClose }: Props) {
               </ContentBox>
 
               <ContentBox checked={thirdAgree} onChange={setThirdAgree} label="개인정보 제3자 제공 동의" primary={primary}>
-                제공받는 자 : 담당 상담사 (컨설턴트)<br />
+                제공받는 자 : 올댓뷰티 상담사<br />
                 제공 목적 : 원활한 1:1 유선 상담 진행<br />
                 제공 항목 : 성명, 휴대폰 번호, 생년월일, 성별, 거주 지역, 자격증 보유 여부<br />
                 보유 기간 : 상담 목적 달성 시 즉시 파기<br />
