@@ -2,18 +2,11 @@
 
 import { useState } from "react"
 import PrivacyModal from "./PrivacyModal"
-import { validateForm, parsePhone } from "@/lib/validate"
+import { validateForm } from "@/lib/validate"
+import { DONE_MESSAGE, INITIAL_LEAD, REGIONS, submitLead } from "@/lib/lead"
 
 export default function FormSection() {
-  const [form, setForm] = useState({
-    customer_name: "",
-    customer_birth: "",
-    mobile1: "010",
-    mobile2: "",
-    customer_sex: "2",
-    region: "",
-    has_license: "N",
-  })
+  const [form, setForm] = useState(INITIAL_LEAD)
   const [showModal, setShowModal] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [focusedField, setFocusedField] = useState<string | null>(null)
@@ -38,40 +31,13 @@ export default function FormSection() {
   }
 
   const handleConfirm = async () => {
-    const phoneResult = parsePhone(form.mobile1, form.mobile2)
-    if (typeof phoneResult === "string") { alert(phoneResult); return }
-
-    const payload = {
-      customer_name: form.customer_name,
-      customer_birth: form.customer_birth,
-      mobile1: phoneResult.mobile1,
-      mobile2: phoneResult.mobile2,
-      mobile3: "",
-      customer_sex: form.customer_sex,
-      region: form.region,
-      has_license: form.has_license,
-      category: "makeup",
-    }
-
     setSubmitted(true)
-    try {
-      const url = process.env.NEXT_PUBLIC_DB_SUBMIT_URL!
-      const key = process.env.NEXT_PUBLIC_DB_API_KEY!
-      const res = await fetch(`${url}?api_key=${key}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      })
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}))
-        alert(`전송 실패: ${err.error ?? res.status}`)
-        setSubmitted(false)
-        return
-      }
-      alert("상담 신청이 완료되었습니다. 담당자가 곧 연락드리겠습니다.")
-      setForm({ customer_name: "", customer_birth: "", mobile1: "010", mobile2: "", customer_sex: "2", region: "", has_license: "N" })
-    } catch {
-      alert("네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.")
+    const result = await submitLead(form, `form${window.location.pathname}${window.location.search}`)
+    if (result.ok) {
+      alert(DONE_MESSAGE)
+      setForm(INITIAL_LEAD)
+    } else {
+      alert(result.message)
     }
     setSubmitted(false)
   }
@@ -121,7 +87,8 @@ export default function FormSection() {
         <PrivacyModal onConfirm={handleConfirm} onClose={() => setShowModal(false)} />
       )}
 
-      <div style={{
+      {/* data-lead-form — 이 폼이 화면에 보이면 하단 고정 폼(BottomForm)이 숨는다 */}
+      <div data-lead-form style={{
         background: 'var(--bg-card)',
         border: '1px solid var(--border-color)',
         borderRadius: '32px',
@@ -225,7 +192,7 @@ export default function FormSection() {
                   style={{ ...inputStyle, appearance: 'none', cursor: 'pointer', color: form.region ? 'var(--text-primary)' : 'var(--text-muted)' }}
                 >
                   <option value="" disabled hidden>지역 선택</option>
-                  {["서울","부산","대구","인천","광주","대전","울산","세종","경기","강원","충북","충남","전북","전남","경북","경남","제주"].map((r) => (
+                  {REGIONS.map((r) => (
                     <option key={r} value={r}>{r}</option>
                   ))}
                 </select>
@@ -279,28 +246,29 @@ export default function FormSection() {
               style={{
                 width: '100%',
                 padding: '20px',
-                background: 'var(--accent)',
+                background: 'linear-gradient(135deg, #DDBA78 0%, #C5A059 50%, #A9843F 100%)',
                 color: 'white',
                 border: 'none',
                 borderRadius: '16px',
-                fontSize: '16px',
+                fontSize: '17px',
                 fontWeight: 950,
+                textShadow: '0 1px 2px rgba(120, 88, 30, 0.35)',
                 cursor: submitted ? 'not-allowed' : 'pointer',
                 opacity: submitted ? 0.6 : 1,
-                boxShadow: '0 8px 30px rgba(0,0,0,0.15)',
+                boxShadow: '0 10px 28px rgba(197, 160, 89, 0.38)',
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'var(--primary)';
+                e.currentTarget.style.background = 'linear-gradient(135deg, #E6C789 0%, #CFAB63 50%, #B38D46 100%)';
                 e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 12px 40px rgba(197, 160, 89, 0.3)';
+                e.currentTarget.style.boxShadow = '0 14px 36px rgba(197, 160, 89, 0.5)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'var(--accent)';
+                e.currentTarget.style.background = 'linear-gradient(135deg, #DDBA78 0%, #C5A059 50%, #A9843F 100%)';
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 8px 30px rgba(0,0,0,0.15)';
+                e.currentTarget.style.boxShadow = '0 10px 28px rgba(197, 160, 89, 0.38)';
               }}
             >
               {submitted ? '전송 중...' : '무료 상담 신청하기'}

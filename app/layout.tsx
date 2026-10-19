@@ -4,6 +4,7 @@ import { Geist } from 'next/font/google';
 import './globals.css';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import BottomForm from '@/components/BottomForm';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' });
 
@@ -216,6 +217,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
+        <BottomForm />
       </body>
     </html>
   );

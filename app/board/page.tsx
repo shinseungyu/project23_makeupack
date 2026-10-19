@@ -38,7 +38,14 @@ export default async function BoardPage({ searchParams }: { searchParams: Promis
         </Link>
         <span style={{ background: 'var(--primary-light)', color: 'var(--primary-dark)', fontSize: 11, fontWeight: 900, padding: '4px 14px', borderRadius: 50, textTransform: 'uppercase', letterSpacing: '0.1em' }}>{post.category}</span>
         <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 950, marginTop: 16, marginBottom: 12, lineHeight: 1.2, letterSpacing: '-0.03em' }}>{post.title}</h1>
-        <p style={{ color: 'var(--text-muted)', fontSize: 14, marginBottom: 40 }}>{post.date}</p>
+        <p style={{ color: 'var(--text-muted)', fontSize: 14, marginBottom: 32 }}>{post.date}</p>
+
+        {/* 상담 폼 — 들어오자마자 보이게 본문보다 위에 둔다 */}
+        <section style={{ marginBottom: 56 }}>
+          <p style={{ fontSize: 13, fontWeight: 900, color: 'var(--primary)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>무료 상담 신청</p>
+          <h2 style={{ fontSize: 22, fontWeight: 900, marginBottom: 20 }}>메이크업학원 맞춤 상담받기</h2>
+          <FormSection />
+        </section>
         
         <div style={{ background: 'white', border: '1px solid var(--border-color)', borderRadius: 32, padding: '48px 40px', fontSize: 16, color: 'var(--text-secondary)', lineHeight: 1.9, whiteSpace: 'pre-line', boxShadow: 'var(--shadow-sm)' }}>
           {post.content}
@@ -49,12 +56,6 @@ export default async function BoardPage({ searchParams }: { searchParams: Promis
             <span key={tag} style={{ background: 'var(--primary-light)', color: 'var(--primary-dark)', fontSize: 12, fontWeight: 700, padding: '6px 16px', borderRadius: 50 }}>#{tag}</span>
           ))}
         </div>
-
-        <section style={{ marginTop: 80 }}>
-          <p style={{ fontSize: 13, fontWeight: 900, color: 'var(--primary)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 16 }}>무료 상담 신청</p>
-          <h2 style={{ fontSize: 22, fontWeight: 900, marginBottom: 24 }}>메이크업학원 맞춤 상담받기</h2>
-          <FormSection />
-        </section>
 
         <section style={{ marginTop: 80 }}>
           <h2 style={{ fontSize: 22, fontWeight: 900, marginBottom: 24 }}>관련 글 더 보기</h2>
