@@ -10,7 +10,6 @@ export const INITIAL_LEAD = {
   mobile2: '',
   customer_sex: '2',
   region: '',
-  has_license: 'N',
 }
 export type LeadForm = typeof INITIAL_LEAD
 
@@ -29,7 +28,6 @@ export async function submitLead(form: LeadForm, sourcePage: string): Promise<{ 
     mobile3: '',
     customer_sex: form.customer_sex,
     region: form.region,
-    has_license: form.has_license,
     category: 'makeup',
     source_page: sourcePage,
   }

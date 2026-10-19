@@ -118,13 +118,6 @@ export default function BottomForm() {
               {REGIONS.map((r) => <option key={r} value={r}>{r}</option>)}
             </select>
 
-            <button
-              type="button" className="bfm__lic" aria-pressed={form.has_license === 'Y'}
-              onClick={() => set('has_license', form.has_license === 'Y' ? 'N' : 'Y')} disabled={sending}
-            >
-              자격증 {form.has_license === 'Y' ? '보유' : '없음'}
-            </button>
-
             <button type="submit" className="bfm__cta bfm__submit" disabled={sending}>
               {sending ? '전송 중...' : '무료 상담 신청'}
             </button>

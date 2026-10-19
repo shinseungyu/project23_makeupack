@@ -141,7 +141,6 @@ body { padding-bottom: var(--bottom-form-h, 0px); }
     "name   name"
     "birth  region"
     "phone  phone"
-    "lic    lic"
     "submit submit";
 }
 .bfm__title { grid-area: title; font-size: 16px; font-weight: 900; color: var(--text-primary); }
@@ -151,7 +150,6 @@ body { padding-bottom: var(--bottom-form-h, 0px); }
 .bfm__f--birth { grid-area: birth; }
 .bfm__f--phone { grid-area: phone; }
 .bfm__f--region { grid-area: region; }
-.bfm__lic { grid-area: lic; }
 .bfm__submit { grid-area: submit; width: 100%; }
 .bfm__in {
   width: 100%; min-width: 0; height: 44px; padding: 0 12px;
@@ -165,16 +163,11 @@ select.bfm__in.is-empty { color: var(--text-muted); }
 .bfm__seg { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); display: flex; gap: 2px; padding: 3px; border-radius: 10px; background: var(--accent-light); }
 .bfm__seg button { min-width: 34px; height: 30px; border: none; border-radius: 8px; background: transparent; color: var(--text-muted); font-size: 13px; font-weight: 800; cursor: pointer; }
 .bfm__seg button[aria-pressed="true"] { background: var(--primary); color: white; }
-.bfm__lic {
-  height: 44px; padding: 0 14px; border: 1.5px solid var(--border-color); border-radius: 12px;
-  background: white; color: var(--text-muted); font-size: 14px; font-weight: 800; cursor: pointer; white-space: nowrap;
-}
-.bfm__lic[aria-pressed="true"] { border-color: var(--primary); background: var(--primary-light); color: var(--primary-dark); }
 
 @media (min-width: 1000px) {
   .bfm__form {
-    grid-template-columns: auto minmax(0, 1.4fr) minmax(0, 0.9fr) minmax(0, 1.5fr) minmax(0, 0.9fr) auto auto auto;
-    grid-template-areas: "title name birth phone region lic submit close";
+    grid-template-columns: auto minmax(0, 1.4fr) minmax(0, 0.9fr) minmax(0, 1.5fr) minmax(0, 0.9fr) auto auto;
+    grid-template-areas: "title name birth phone region submit close";
   }
   .bfm__title { margin-right: 6px; white-space: nowrap; }
   .bfm__submit { width: auto; padding: 0 22px; }

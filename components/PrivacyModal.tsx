@@ -71,7 +71,7 @@ export default function PrivacyModal({ onConfirm, onClose }: Props) {
               <ContentBox checked={priAgree} onChange={setPriAgree} label="개인정보 수집 및 이용 동의" primary={primary}>
                 수집 주체 : (주)와야미디어<br />
                 수집 목적 : 메이크업 학원 관련 상담 및 문의 응대<br />
-                수집 항목 : 성명, 휴대폰 번호, 생년월일, 성별, 거주 지역, 자격증 보유 여부<br />
+                수집 항목 : 성명, 휴대폰 번호, 생년월일, 성별, 거주 지역<br />
                 보유 기간 : 수집일로부터 1년 (또는 요청 시 즉시 파기)<br />
                 동의 거부 권리 : 동의를 거부하실 권리가 있으나, 거부 시 상담 신청이 제한될 수 있습니다.
               </ContentBox>
@@ -79,7 +79,7 @@ export default function PrivacyModal({ onConfirm, onClose }: Props) {
               <ContentBox checked={thirdAgree} onChange={setThirdAgree} label="개인정보 제3자 제공 동의" primary={primary}>
                 제공받는 자 : 올댓뷰티 상담사<br />
                 제공 목적 : 원활한 1:1 유선 상담 진행<br />
-                제공 항목 : 성명, 휴대폰 번호, 생년월일, 성별, 거주 지역, 자격증 보유 여부<br />
+                제공 항목 : 성명, 휴대폰 번호, 생년월일, 성별, 거주 지역<br />
                 보유 기간 : 상담 목적 달성 시 즉시 파기<br />
                 동의 거부 권리 : 동의를 거부하실 권리가 있으나, 거부 시 상담 신청이 제한될 수 있습니다.
               </ContentBox>

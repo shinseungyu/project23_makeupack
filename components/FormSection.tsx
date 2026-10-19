@@ -201,42 +201,6 @@ export default function FormSection() {
             </div>
           </div>
 
-          {/* 자격증 보유 여부 */}
-          <div style={inputGroupStyle}>
-            <label style={labelStyle}>자격증 보유 여부</label>
-            <div style={getInputWrapperStyle('license')}>
-              <span style={{ ...inputStyle, color: 'var(--text-secondary)', fontSize: '15px' }}>
-                미용사(메이크업) 자격증 보유 여부
-              </span>
-              <button
-                type="button"
-                onClick={() => set("has_license", form.has_license === "Y" ? "N" : "Y")}
-                style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0 }}
-              >
-                <span style={{
-                  fontSize: '13px', fontWeight: 700, width: '32px', textAlign: 'right',
-                  color: form.has_license === "Y" ? 'var(--primary)' : 'var(--text-muted)',
-                  transition: 'color 0.2s',
-                }}>
-                  {form.has_license === "Y" ? "보유" : "없음"}
-                </span>
-                <div style={{
-                  position: 'relative', width: '44px', height: '24px', borderRadius: '12px',
-                  background: form.has_license === "Y" ? 'var(--primary)' : 'var(--border-color)',
-                  transition: 'background 0.3s',
-                }}>
-                  <div style={{
-                    position: 'absolute', top: '3px', left: '3px',
-                    width: '18px', height: '18px', borderRadius: '50%', background: 'white',
-                    boxShadow: '0 1px 4px rgba(0,0,0,0.2)',
-                    transform: form.has_license === "Y" ? 'translateX(20px)' : 'translateX(0)',
-                    transition: 'transform 0.3s ease',
-                  }} />
-                </div>
-              </button>
-            </div>
-          </div>
-
           {/* 제출 버튼 */}
           <div style={{ marginTop: '8px' }}>
             <button
