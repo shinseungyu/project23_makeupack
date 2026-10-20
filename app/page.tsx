@@ -2,12 +2,42 @@ import Link from 'next/link';
 import Image from 'next/image';
 import postsData from '@/data/posts.json';
 import FormSection from '@/components/FormSection';
+import { pageMetadata } from '@/lib/article-meta';
+import { HOME_DESC, HOME_TITLE, SITE_NAME, SITE_URL } from '@/lib/site';
+
+export const metadata = pageMetadata(HOME_TITLE, HOME_DESC, '/');
+
+const homeJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Service',
+      '@id': `${SITE_URL}/#service`,
+      name: SITE_NAME,
+      serviceType: '메이크업학원 수강료 비교 및 상담 서비스',
+      areaServed: { '@type': 'Country', name: 'KR' },
+      provider: { '@id': `${SITE_URL}/#organization` },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}/#webpage`,
+      url: `${SITE_URL}/`,
+      name: HOME_TITLE,
+      inLanguage: 'ko-KR',
+      description: HOME_DESC,
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      about: ['메이크업학원수강료', '메이크업학원비용', '국비지원 메이크업학원', '내일배움카드 메이크업', '메이크업아티스트 취업', '강남메이크업학원'],
+      mainEntity: { '@id': `${SITE_URL}/#service` },
+    },
+  ],
+};
 
 export default function HomePage() {
   const recentPosts = postsData.slice(0, 3);
 
   return (
     <main style={{ background: 'var(--bg-main)', minHeight: '100vh', paddingBottom: '100px' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }} />
 
       {/* ── 히어로 (bg.webp 배경) ── */}
       <section style={{ position: 'relative', overflow: 'hidden', minHeight: 580, display: 'flex', alignItems: 'center', textAlign: 'center' }}>

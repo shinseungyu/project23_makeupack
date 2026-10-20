@@ -1,4 +1,7 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/article-meta';
+import JsonLd from '@/components/JsonLd';
+import { articleLd, breadcrumbLd, collectionLd } from '@/lib/jsonld';
 import Link from 'next/link';
 import postsData from '@/data/posts.json';
 import { ChevronLeft } from 'lucide-react';
@@ -10,18 +13,14 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
   const post = postId ? postsData.find(p => p.id === postId) : null;
 
   if (post) {
-    return {
-      title: post.title,
-      description: post.summary,
-      alternates: { canonical: `/board?id=${post.id}` },
-    };
+    return pageMetadata(post.title, post.summary, `/board?id=${post.id}`);
   }
 
-  return {
-    title: '메이크업 학원 정보게시판 | 수강료·국비지원·취업 정보',
-    description: '메이크업학원 수강료, 국비지원 신청 방법, 자격증 취득, 취업·창업 정보를 모은 정보게시판입니다. 강남메이크업학원 후기, 내일배움카드 실사용 후기 등 실전 정보를 확인하세요.',
-    alternates: { canonical: '/board' },
-  };
+  return pageMetadata(
+    '메이크업 학원 정보게시판 | 수강료·국비지원·취업 정보',
+    '메이크업학원 수강료, 국비지원 신청 방법, 자격증 취득, 취업·창업 정보를 모은 정보게시판입니다. 강남메이크업학원 후기, 내일배움카드 실사용 후기 등 실전 정보를 확인하세요.',
+    '/board',
+  );
 }
 
 export default async function BoardPage({ searchParams }: { searchParams: Promise<{ id?: string }> }) {
@@ -33,6 +32,12 @@ export default async function BoardPage({ searchParams }: { searchParams: Promis
     const otherPosts = postsData.filter(p => p.id !== post.id).slice(0, 3);
     return (
       <main style={{ maxWidth: 860, margin: '0 auto', padding: '60px 1.5rem 120px' }}>
+        <JsonLd
+          data={[
+            articleLd({ type: 'BlogPosting', headline: post.title, description: post.summary, path: `/board?id=${post.id}`, section: post.category, datePublished: post.date }),
+            breadcrumbLd([{ name: '홈', path: '/' }, { name: '정보게시판', path: '/board' }, { name: post.title, path: `/board?id=${post.id}` }]),
+          ]}
+        />
         <Link href="/board" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--text-muted)', textDecoration: 'none', fontSize: 13, fontWeight: 700, marginBottom: 40 }}>
           <ChevronLeft size={16} /> 정보게시판으로 돌아가기
         </Link>
@@ -94,6 +99,17 @@ export default async function BoardPage({ searchParams }: { searchParams: Promis
 
   return (
     <main style={{ maxWidth: 1100, margin: '0 auto', padding: '60px 1.5rem 120px' }}>
+      <JsonLd
+        data={[
+          collectionLd({
+            name: '메이크업 학원 정보게시판',
+            description: '메이크업학원 수강료, 국비지원 신청 방법, 자격증 취득, 취업·창업 정보를 모은 정보게시판입니다.',
+            path: '/board',
+            items: postsData.map((p) => ({ name: p.title, path: `/board?id=${p.id}` })),
+          }),
+          breadcrumbLd([{ name: '홈', path: '/' }, { name: '정보게시판', path: '/board' }]),
+        ]}
+      />
       <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--text-muted)', textDecoration: 'none', fontSize: 13, fontWeight: 700, marginBottom: 40 }}>
         <ChevronLeft size={16} /> 홈으로
       </Link>

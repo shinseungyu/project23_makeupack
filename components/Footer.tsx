@@ -1,5 +1,6 @@
 import PrivacyPolicyModal from './PrivacyPolicyModal';
 import LegalNoticeModal from './LegalNoticeModal';
+import { ARTICLES, ROUTE_CLUSTERS } from '@/lib/content';
 
 export default function Footer() {
   return (
@@ -16,6 +17,18 @@ export default function Footer() {
         <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', marginBottom: 24 }}>
           메이크업학원 수강료 · 국비지원 · 자격증 · 취업 · 창업 정보 전문
         </p>
+        {/* 주제별 허브와 하위 글 — 모든 페이지에서 서브페이지로 이어지는 내부링크 */}
+        <nav aria-label="주제별 정보" style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem 1.25rem', flexWrap: 'wrap', maxWidth: 820, margin: '0 auto 16px' }}>
+          <a href="/funding" style={footerHub}>국비지원</a>
+          {ROUTE_CLUSTERS.map((c) => (
+            <a key={c.slug} href={`/${c.slug}`} style={footerHub}>{c.name}</a>
+          ))}
+        </nav>
+        <nav aria-label="인기 글" style={{ display: 'flex', justifyContent: 'center', gap: '0.4rem 1rem', flexWrap: 'wrap', maxWidth: 820, margin: '0 auto 28px' }}>
+          {ARTICLES.filter((a) => !a.isHub).map((a) => (
+            <a key={a.no} href={a.path} style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>{a.keyword}</a>
+          ))}
+        </nav>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap', marginBottom: 28 }}>
           <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>
             <PrivacyPolicyModal />
@@ -33,3 +46,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+const footerHub = { fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.7)', textDecoration: 'none' };

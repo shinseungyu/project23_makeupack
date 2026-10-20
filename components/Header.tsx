@@ -5,7 +5,9 @@ import Link from 'next/link';
 
 const navLinks = [
   { href: '/', label: '홈' },
+  { href: '/academy', label: '학원 고르기' },
   { href: '/funding', label: '국비지원' },
+  { href: '/license', label: '자격증' },
   { href: '/employment', label: '해외취업' },
   { href: '/qna', label: 'FAQ' },
   { href: '/board', label: '정보게시판' },

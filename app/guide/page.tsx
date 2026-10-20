@@ -1,16 +1,25 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/article-meta';
+import JsonLd from '@/components/JsonLd';
+import { articleLd, breadcrumbLd, faqLd } from '@/lib/jsonld';
 import Link from 'next/link';
 import { ChevronLeft, CheckCircle2 } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: '메이크업학원 선택 가이드 | 후회 없는 학원 등록 전 체크리스트 2026',
-  description: '메이크업학원 등록 전 반드시 확인해야 할 5가지 기준(강사 경력, 소수정예, 재료비, 취업 연계, 국비지원)을 상세히 안내합니다. 수강료 낭비 없이 올바른 학원을 선택하는 완벽 가이드입니다.',
-  alternates: { canonical: '/guide' },
-};
+export const metadata: Metadata = pageMetadata(
+  '메이크업학원 선택 가이드 | 후회 없는 학원 등록 전 체크리스트 2026',
+  '메이크업학원 등록 전 반드시 확인해야 할 5가지 기준(강사 경력, 소수정예, 재료비, 취업 연계, 국비지원)을 상세히 안내합니다. 수강료 낭비 없이 올바른 학원을 선택하는 완벽 가이드입니다.',
+  '/guide',
+);
+
+const LD = [
+  articleLd({ headline: '메이크업학원 선택 가이드', description: '메이크업학원 등록 전 반드시 확인해야 할 5가지 기준(강사 경력, 소수정예, 재료비, 취업 연계, 국비지원)을 상세히 안내합니다. 수강료 낭비 없이 올바른 학원을 선택하는 완벽 가이드입니다.', path: '/guide', datePublished: '2026-05-03', dateModified: '2026-05-03' }),
+  breadcrumbLd([{ name: '홈', path: '/' }, { name: '학원 선택 가이드', path: '/guide' }]),
+];
 
 export default function GuidePage() {
   return (
     <main style={{ maxWidth: 900, margin: '0 auto', padding: '60px 1.5rem 120px' }}>
+      <JsonLd data={LD} />
       <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--text-muted)', textDecoration: 'none', fontSize: 13, fontWeight: 700, marginBottom: 40 }}>
         <ChevronLeft size={16} /> 홈으로 돌아가기
       </Link>

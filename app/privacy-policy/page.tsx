@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '개인정보처리방침 | 메이크업학원수강료비교',
-  robots: { index: false, follow: false },
+  title: '개인정보처리방침',
+  alternates: { canonical: '/privacy-policy' },
+  robots: { index: false, follow: true },
 };
 
 export default function PrivacyPolicy() {

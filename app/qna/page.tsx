@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
+import { pageMetadata } from '@/lib/article-meta';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbLd } from '@/lib/jsonld';
 import QnaClient from './QnaClient';
 
-export const metadata: Metadata = {
-  title: '메이크업학원 수강료·국비지원 FAQ | 자주 묻는 질문 총정리 2026',
-  description: '메이크업학원 수강료, 국비지원, 환불 규정, 강남 학원 비교, 취업 수입까지 — 등록 전 꼭 알아야 할 질문과 전문가 답변을 한눈에 정리했습니다.',
-  alternates: { canonical: '/qna' },
-};
+export const metadata: Metadata = pageMetadata(
+  '메이크업학원 수강료·국비지원 FAQ | 자주 묻는 질문 총정리 2026',
+  '메이크업학원 수강료, 국비지원, 환불 규정, 강남 학원 비교, 취업 수입까지 — 등록 전 꼭 알아야 할 질문과 전문가 답변을 한눈에 정리했습니다.',
+  '/qna',
+);
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -43,12 +45,7 @@ const faqJsonLd = {
 export default function QnaPage() {
   return (
     <>
-      <Script
-        id="qna-faq-jsonld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        strategy="beforeInteractive"
-      />
+      <JsonLd data={[faqJsonLd, breadcrumbLd([{ name: '홈', path: '/' }, { name: 'FAQ', path: '/qna' }])]} />
       <QnaClient />
     </>
   );

@@ -1,17 +1,34 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/article-meta';
+import JsonLd from '@/components/JsonLd';
+import { articleLd, breadcrumbLd, faqLd } from '@/lib/jsonld';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import FormSection from '@/components/FormSection';
 
-export const metadata: Metadata = {
-  title: '메이크업학원 국비지원 완벽 가이드 | 내일배움카드 신청방법',
-  description: '메이크업학원 국비지원(내일배움카드) 신청 자격, 지원 금액, 훈련장려금, 자비부담 계산법, 신청 방법까지 2026년 기준으로 총정리했습니다. 재직자·실업자 모두 최대 500만원 지원 가능합니다.',
-  alternates: { canonical: '/funding' },
-};
+export const metadata: Metadata = pageMetadata(
+  '메이크업학원 국비지원 완벽 가이드 | 내일배움카드 신청방법',
+  '메이크업학원 국비지원(내일배움카드) 신청 자격, 지원 금액, 훈련장려금, 자비부담 계산법, 신청 방법까지 2026년 기준으로 총정리했습니다. 재직자·실업자 모두 최대 500만원 지원 가능합니다.',
+  '/funding',
+);
+
+const FAQS = [
+  { q: '이미 다른 과정을 들었는데 또 들을 수 있나요?', a: '네, 카드 잔액이 남아있다면 추가 수강이 가능합니다. 다만 동일 분야 중복 수강은 자비부담 비율이 높아질 수 있으므로, 신청 전 고용센터에 중복 수강 가능 여부를 확인하는 것이 좋습니다.' },
+  { q: '자부담금이 아예 없는 경우도 있나요?', a: '취업지원제도 1유형 참여자(실업자 중 특별 사유 해당자)나 기초생활수급자의 경우 수강료가 100% 지원되어 자비 부담이 없는 경우가 많습니다. 고용센터 상담을 통해 본인 유형을 확인하세요.' },
+  { q: '카드 발급 후 언제까지 써야 하나요?', a: '국민내일배움카드는 발급일로부터 5년간 유효합니다. 한도(최대 500만원)는 5년 이내에 사용하면 되며, 잔여 한도는 이월됩니다. 미사용 잔액이 있더라도 5년 경과 시 소멸되므로 유효기간 내 활용하세요.' },
+  { q: '훈련장려금은 얼마를 받을 수 있나요?', a: '2026년 기준 훈련장려금은 출석률 80% 이상의 실업자 참여자에게 월 최대 116,000원이 지급됩니다. 3개월 과정 수강 시 최대 348,000원을 추가로 받을 수 있습니다. 매월 HRD-Net에서 직접 신청해야 하며 자동 지급이 아닙니다.' },
+];
+
+const LD = [
+  articleLd({ headline: '메이크업학원 국비지원 완벽 가이드', description: '메이크업학원 국비지원(내일배움카드) 신청 자격, 지원 금액, 훈련장려금, 자비부담 계산법, 신청 방법까지 2026년 기준으로 총정리했습니다. 재직자·실업자 모두 최대 500만원 지원 가능합니다.', path: '/funding', datePublished: '2026-05-03', dateModified: '2026-10-20' }),
+  breadcrumbLd([{ name: '홈', path: '/' }, { name: '국비지원', path: '/funding' }]),
+  faqLd(FAQS),
+];
 
 export default function FundingPage() {
   return (
     <main style={{ maxWidth: 900, margin: '0 auto', padding: '60px 1.5rem 120px' }}>
+      <JsonLd data={LD} />
       <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--text-muted)', textDecoration: 'none', fontSize: 13, fontWeight: 700, marginBottom: 40 }}>
         <ChevronLeft size={16} /> 홈으로 돌아가기
       </Link>
@@ -171,12 +188,7 @@ export default function FundingPage() {
           메이크업학원 수강료 국비지원 신청 과정에서 자주 발생하는 궁금증을 정리했습니다.
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          {[
-            { q: '이미 다른 과정을 들었는데 또 들을 수 있나요?', a: '네, 카드 잔액이 남아있다면 추가 수강이 가능합니다. 다만 동일 분야 중복 수강은 자비부담 비율이 높아질 수 있으므로, 신청 전 고용센터에 중복 수강 가능 여부를 확인하는 것이 좋습니다.' },
-            { q: '자부담금이 아예 없는 경우도 있나요?', a: '취업지원제도 1유형 참여자(실업자 중 특별 사유 해당자)나 기초생활수급자의 경우 수강료가 100% 지원되어 자비 부담이 없는 경우가 많습니다. 고용센터 상담을 통해 본인 유형을 확인하세요.' },
-            { q: '카드 발급 후 언제까지 써야 하나요?', a: '국민내일배움카드는 발급일로부터 5년간 유효합니다. 한도(최대 500만원)는 5년 이내에 사용하면 되며, 잔여 한도는 이월됩니다. 미사용 잔액이 있더라도 5년 경과 시 소멸되므로 유효기간 내 활용하세요.' },
-            { q: '훈련장려금은 얼마를 받을 수 있나요?', a: '2026년 기준 훈련장려금은 출석률 80% 이상의 실업자 참여자에게 월 최대 116,000원이 지급됩니다. 3개월 과정 수강 시 최대 348,000원을 추가로 받을 수 있습니다. 매월 HRD-Net에서 직접 신청해야 하며 자동 지급이 아닙니다.' },
-          ].map((faq, i) => (
+          {FAQS.map((faq, i) => (
             <div key={i} style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: 20, padding: '24px 28px' }}>
               <p style={{ fontWeight: 900, fontSize: 16, marginBottom: 10, color: 'var(--text-primary)' }}>Q. {faq.q}</p>
               <p style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.75, margin: 0 }}>{faq.a}</p>
@@ -190,6 +202,8 @@ export default function FundingPage() {
         <p style={{ fontSize: 12, fontWeight: 900, color: 'var(--primary)', letterSpacing: '0.1em', marginBottom: 16 }}>함께 보면 좋은 정보</p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
           {[
+            { href: '/funding/naeilbaeum-card', label: '내일배움카드 신청 방법·국비 과정 등록' },
+            { href: '/academy', label: '메이크업학원 과정별 비교' },
             { href: '/guide', label: '학원 선택 체크리스트' },
             { href: '/employment', label: '자격증 취득 후 해외취업' },
             { href: '/qna', label: '국비지원 자주 묻는 질문' },

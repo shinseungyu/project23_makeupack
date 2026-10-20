@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '이용약관 | 메이크업학원수강료비교',
-  robots: { index: false, follow: false },
+  title: '이용약관',
+  alternates: { canonical: '/terms-of-service' },
+  robots: { index: false, follow: true },
 };
 
 export default function TermsOfService() {

@@ -5,13 +5,10 @@ import './globals.css';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import BottomForm from '@/components/BottomForm';
+import { HOME_DESC as DESC, HOME_TITLE as TITLE, SITE_NAME, SITE_URL } from '@/lib/site';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' });
 
-const SITE_NAME = '메이크업학원수강료비교';
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://makeupcost.com';
-const TITLE = '메이크업학원수강료 비교 | 메이크업학원비용·국비지원·가격 총정리 (2026)';
-const DESC = '메이크업학원수강료 비교 사이트. 메이크업학원비용·메이크업학원가격·국비지원 메이크업학원 정보를 2026년 최신 기준으로 총정리했습니다. 강남메이크업학원 수강료, 내일배움카드 지원율, 자격증 취득 비용까지 한눈에 비교하고 무료 상담으로 확인하세요.';
 const OG_IMAGE = `${SITE_URL}/thumb.webp`;
 
 export const metadata: Metadata = {
@@ -21,7 +18,7 @@ export const metadata: Metadata = {
   },
   description: DESC,
   metadataBase: new URL(SITE_URL),
-  alternates: { canonical: '/' },
+  // canonical 은 페이지마다 따로 준다 (여기 두면 canonical 없는 페이지·404 가 전부 홈을 가리킨다)
   keywords: [
     '메이크업학원',
     '강남메이크업학원',
@@ -49,7 +46,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: TITLE,
     description: DESC,
-    url: SITE_URL,
     siteName: SITE_NAME,
     locale: 'ko_KR',
     type: 'website',
@@ -71,7 +67,15 @@ export const metadata: Metadata = {
   },
   authors: [{ name: SITE_NAME }],
   publisher: SITE_NAME,
-  robots: { index: true, follow: true },
+  // 페이지에서 noindex 를 주면 이 값이 통째로 바뀐다. robots 메타 태그를 head 에 따로 쓰지 않는다
+  robots: {
+    index: true,
+    follow: true,
+    'max-image-preview': 'large',
+    'max-snippet': -1,
+    'max-video-preview': -1,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
+  },
   formatDetection: { telephone: false, date: false, address: false, email: false },
   icons: {
     icon: '/favicon.ico',
@@ -80,21 +84,6 @@ export const metadata: Metadata = {
   },
   other: {
     'google-adsense-account': 'ca-pub-5378247298190063',
-    'NaverBot': 'all',
-    'Yeti': 'all',
-    'googlebot': 'all',
-    'subject': '메이크업학원수강료비교사이트',
-    'title': TITLE,
-    'publisher': SITE_NAME,
-    'author': SITE_NAME,
-    'Other Agent': SITE_NAME,
-    'location': 'South Korea',
-    'distribution': 'global',
-    'rating': 'general',
-    'format-detection': 'telephone=no, date=no, address=no, email=no',
-    'itemprop:name': TITLE,
-    'itemprop:description': DESC,
-    'itemprop:image': OG_IMAGE,
   },
 };
 
@@ -110,11 +99,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         url: `${siteUrl}/`,
         name: SITE_NAME,
         inLanguage: 'ko-KR',
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: { '@type': 'EntryPoint', urlTemplate: `${siteUrl}/qna?q={search_term_string}` },
-          'query-input': 'required name=search_term_string',
-        },
       },
       {
         '@type': 'Organization',
@@ -123,58 +107,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         url: `${siteUrl}/`,
         description: '메이크업학원 수강료·국비지원·취업 정보를 비교 제공하는 메이크업 전문 정보 사이트입니다.',
       },
-      {
-        '@type': 'Service',
-        '@id': `${siteUrl}/#service`,
-        name: SITE_NAME,
-        serviceType: '메이크업학원 수강료 비교 및 상담 서비스',
-        areaServed: { '@type': 'Country', name: 'KR' },
-        provider: { '@id': `${siteUrl}/#organization` },
-      },
-      {
-        '@type': 'WebPage',
-        '@id': `${siteUrl}/#webpage`,
-        url: `${siteUrl}/`,
-        name: TITLE,
-        inLanguage: 'ko-KR',
-        description: DESC,
-        isPartOf: { '@id': `${siteUrl}/#website` },
-        about: ['메이크업학원수강료', '메이크업학원비용', '국비지원 메이크업학원', '내일배움카드 메이크업', '메이크업아티스트 취업', '강남메이크업학원'],
-        mainEntity: { '@id': `${siteUrl}/#service` },
-      },
-      {
-        '@type': 'BreadcrumbList',
-        '@id': `${siteUrl}/#breadcrumb`,
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: '홈', item: `${siteUrl}/` },
-          { '@type': 'ListItem', position: 2, name: '국비지원', item: `${siteUrl}/funding` },
-          { '@type': 'ListItem', position: 3, name: '해외취업', item: `${siteUrl}/employment` },
-          { '@type': 'ListItem', position: 4, name: 'FAQ', item: `${siteUrl}/qna` },
-        ],
-      },
     ],
   };
 
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
-        <Script
-          id="json-ld"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          strategy="beforeInteractive"
-        />
-
-        {/* Schema.org microdata */}
-        <meta itemProp="name" content={TITLE} />
-        <meta itemProp="description" content={DESC} />
-        <meta itemProp="image" content={OG_IMAGE} />
-
-        {/* 로봇 — 리치 스니펫 최대 허용 */}
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="NaverBot" content="all" />
-        <meta name="Yeti" content="all" />
+        {/* 사이트 공통 스키마. 홈 전용 WebPage·Service 는 app/page.tsx 에 있다.
+            next/script 로 넣으면 JS 실행 후에만 생겨 네이버가 못 읽으므로 일반 script 로 넣는다 */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <meta name="naver-site-verification" content="36e9a3d7ff5db494eb24f2315d9e89c8cdd6f12e" />
 
         {/* 언어 / 지역 — 네이버·구글에 한국 사이트임을 명시 */}

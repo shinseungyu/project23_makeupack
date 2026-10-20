@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '쿠키 정책 | 메이크업학원수강료비교',
-  robots: { index: false, follow: false },
+  title: '쿠키 정책',
+  alternates: { canonical: '/cookie-policy' },
+  robots: { index: false, follow: true },
 };
 
 export default function CookiePolicy() {

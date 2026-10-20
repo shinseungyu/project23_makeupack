@@ -1,17 +1,34 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/article-meta';
+import JsonLd from '@/components/JsonLd';
+import { articleLd, breadcrumbLd, faqLd } from '@/lib/jsonld';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import FormSection from '@/components/FormSection';
 
-export const metadata: Metadata = {
-  title: '메이크업아티스트 해외취업 가이드 | 일본·호주·캐나다·미국 취업',
-  description: '메이크업아티스트 해외취업 준비 방법을 총정리했습니다. 일본·호주·캐나다·미국 취업 비자, 자격증 인정 여부, 예상 급여, 워킹홀리데이 활용법까지 2026년 최신 기준으로 안내합니다.',
-  alternates: { canonical: '/employment' },
-};
+export const metadata: Metadata = pageMetadata(
+  '메이크업아티스트 해외취업 가이드 | 일본·호주·캐나다·미국 취업',
+  '메이크업아티스트 해외취업 준비 방법을 총정리했습니다. 일본·호주·캐나다·미국 취업 비자, 자격증 인정 여부, 예상 급여, 워킹홀리데이 활용법까지 2026년 최신 기준으로 안내합니다.',
+  '/employment',
+);
+
+const FAQS = [
+  { q: '한국 미용사(메이크업) 자격증이 해외에서도 인정되나요?', a: '직접 인정은 대부분의 국가에서 되지 않습니다. 그러나 자격증은 기술 수준의 증거로 포트폴리오와 함께 제출하면 채용에 긍정적으로 작용합니다. 호주·캐나다처럼 현지 자격증 취득이 필요한 국가도 있으므로, 목표 국가의 자격 요건을 미리 확인하세요.' },
+  { q: '영어를 잘 못해도 해외취업이 가능한가요?', a: '일본 취업이라면 일본어를 우선 준비하면 됩니다. 영어권 국가는 기본 소통이 가능한 수준이라도 시작할 수 있으나, 고객 응대가 있는 직종에서는 언어 실력이 경쟁력입니다. 현장 작업 중심의 영화·방송 메이크업은 기술이 우선시되므로 영어가 부족해도 진입이 가능한 편입니다.' },
+  { q: '워킹홀리데이 나이 제한이 지났다면 어떻게 하나요?', a: '31세 이상이라면 워킹홀리데이 대신 취업 비자(LMIA, 기술이민 등)나 학생 비자(현지 학교 입학)를 통해 체류하며 취업 기회를 모색할 수 있습니다. 현지 학교의 Certificate 과정을 이수하면 학생 비자로 파트타임 근무가 가능하고, 졸업 후 취업 비자로 전환할 수 있습니다.' },
+  { q: '국내 학원을 졸업한 뒤 바로 해외취업이 가능한가요?', a: '가능은 하지만 국내 현장 경험이 최소 1~2년 있으면 해외 취업 성공률이 크게 높아집니다. 포트폴리오의 다양성과 품질이 핵심이므로, 국내에서 다양한 분야(웨딩, 화보, 방송)의 경험을 쌓은 뒤 도전하는 것을 권장합니다.' },
+];
+
+const LD = [
+  articleLd({ headline: '메이크업아티스트 해외취업 가이드', description: '메이크업아티스트 해외취업 준비 방법을 총정리했습니다. 일본·호주·캐나다·미국 취업 비자, 자격증 인정 여부, 예상 급여, 워킹홀리데이 활용법까지 2026년 최신 기준으로 안내합니다.', path: '/employment', datePublished: '2026-05-03', dateModified: '2026-05-24' }),
+  breadcrumbLd([{ name: '홈', path: '/' }, { name: '해외취업', path: '/employment' }]),
+  faqLd(FAQS),
+];
 
 export default function EmploymentPage() {
   return (
     <main style={{ maxWidth: 900, margin: '0 auto', padding: '60px 1.5rem 120px' }}>
+      <JsonLd data={LD} />
       <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--text-muted)', textDecoration: 'none', fontSize: 13, fontWeight: 700, marginBottom: 40 }}>
         <ChevronLeft size={16} /> 홈으로 돌아가기
       </Link>
@@ -182,12 +199,7 @@ export default function EmploymentPage() {
       <section style={{ marginBottom: 80 }}>
         <h2 style={{ fontSize: 26, fontWeight: 900, marginBottom: 32, letterSpacing: '-0.02em' }}>메이크업아티스트 해외취업 자주 묻는 질문</h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          {[
-            { q: '한국 미용사(메이크업) 자격증이 해외에서도 인정되나요?', a: '직접 인정은 대부분의 국가에서 되지 않습니다. 그러나 자격증은 기술 수준의 증거로 포트폴리오와 함께 제출하면 채용에 긍정적으로 작용합니다. 호주·캐나다처럼 현지 자격증 취득이 필요한 국가도 있으므로, 목표 국가의 자격 요건을 미리 확인하세요.' },
-            { q: '영어를 잘 못해도 해외취업이 가능한가요?', a: '일본 취업이라면 일본어를 우선 준비하면 됩니다. 영어권 국가는 기본 소통이 가능한 수준이라도 시작할 수 있으나, 고객 응대가 있는 직종에서는 언어 실력이 경쟁력입니다. 현장 작업 중심의 영화·방송 메이크업은 기술이 우선시되므로 영어가 부족해도 진입이 가능한 편입니다.' },
-            { q: '워킹홀리데이 나이 제한이 지났다면 어떻게 하나요?', a: '31세 이상이라면 워킹홀리데이 대신 취업 비자(LMIA, 기술이민 등)나 학생 비자(현지 학교 입학)를 통해 체류하며 취업 기회를 모색할 수 있습니다. 현지 학교의 Certificate 과정을 이수하면 학생 비자로 파트타임 근무가 가능하고, 졸업 후 취업 비자로 전환할 수 있습니다.' },
-            { q: '국내 학원을 졸업한 뒤 바로 해외취업이 가능한가요?', a: '가능은 하지만 국내 현장 경험이 최소 1~2년 있으면 해외 취업 성공률이 크게 높아집니다. 포트폴리오의 다양성과 품질이 핵심이므로, 국내에서 다양한 분야(웨딩, 화보, 방송)의 경험을 쌓은 뒤 도전하는 것을 권장합니다.' },
-          ].map((faq, i) => (
+          {FAQS.map((faq, i) => (
             <div key={i} style={{ background: 'white', border: '1px solid var(--border-color)', borderRadius: 20, padding: '28px 30px' }}>
               <p style={{ fontWeight: 900, fontSize: 16, marginBottom: 12, color: 'var(--text-primary)' }}>Q. {faq.q}</p>
               <p style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.75, margin: 0 }}>{faq.a}</p>
