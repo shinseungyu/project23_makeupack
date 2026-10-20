@@ -166,6 +166,10 @@ export default function ArticleView({ article }: { article: Article }) {
             ))}
           </dl>
         )}
+        {/* 메인 히어로처럼 들어오자마자 상담 폼이 보이게 한다 */}
+        <div style={{ marginTop: 32 }}>
+          <FormSection />
+        </div>
       </header>
 
       {/* 도입 */}

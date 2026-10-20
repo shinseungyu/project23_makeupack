@@ -51,6 +51,9 @@ export default async function ClusterPage({ params }: Props) {
         <p style={{ color: 'var(--primary)', fontWeight: 900, fontSize: 12, letterSpacing: '0.05em', marginBottom: 16 }}>{cluster.name}</p>
         <h1 style={{ fontSize: 'clamp(24px, 4.4vw, 36px)', fontWeight: 950, lineHeight: 1.3, letterSpacing: '-0.03em', marginBottom: 20 }}>{intro.h1}</h1>
         <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 16, lineHeight: 1.8, margin: 0 }}>{intro.lead}</p>
+        <div style={{ marginTop: 32 }}>
+          <FormSection />
+        </div>
       </header>
       <ArticleCards title={`${cluster.name} 글 모음`} items={articlesIn(slug)} />
       <section>
